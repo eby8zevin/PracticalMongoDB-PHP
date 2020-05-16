@@ -56,3 +56,4 @@ WriteResult({ "nInserted" : 1 })
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "nama" : "Mary", "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "nama" : "Bob", "age" : 24 }
+>
