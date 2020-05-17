@@ -5,49 +5,68 @@ admin   0.000GB
 config  0.000GB
 local   0.000GB
 mydb    0.000GB
+
 > use mydb
 switched to db mydb
+
 > db
 mydb
+
 > db.friends.update({}, {$set: {gender: "m"}})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
 > db.friends.find()
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23, "gender" : "m" }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24 }
+
 > db.friends.update({}, {$set: {gender: "m"}}, {multi: true})
 WriteResult({ "nMatched" : 3, "nUpserted" : 0, "nModified" : 2 })
+
 > db.friends.find()
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23, "gender" : "m" }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25, "gender" : "m" }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24, "gender" : "m" }
+
 > db.friends.update({name: "Mary"}, {$set: {gender: "f"}}, {multi: true})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
 > db.friends.find()
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23, "gender" : "m" }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25, "gender" : "f" }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24, "gender" : "m" }
+
 > db.friends.update({}, {$unset: {gender: ""}}, {multi: true})
 WriteResult({ "nMatched" : 3, "nUpserted" : 0, "nModified" : 3 })
+
 > db.friends.find()
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24 }
+
 > db.friends.update({name: "John"}, {name: "John2", favoriteFood: "pizza"})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
 > db.friends.find()
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John2", "favoriteFood" : "pizza" }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24 }
+
 > db.friends.remove({name: "John2"})
 WriteResult({ "nRemoved" : 1 })
+
 > db.friends.find()
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24 }
+
 > db.friends.remove({})
 WriteResult({ "nRemoved" : 2 })
+
 > db.friends.find()
+
 > db.friends.drop()
 true
+
 > show collections
+
 >
