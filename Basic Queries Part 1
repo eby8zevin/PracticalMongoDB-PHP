@@ -4,56 +4,75 @@
 admin   0.000GB
 config  0.000GB
 local   0.000GB
+
 > use mydb
 switched to db mydb
+
 > db.createCollection("friends")
 { "ok" : 1 }
+
 > db.friends.insert({name: "John", age:23})
 WriteResult({ "nInserted" : 1 })
+
 > db.friends.find()
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
+
 > db.friends.insert({name: "Mary", age: 25})
 WriteResult({ "nInserted" : 1 })
+
 > db.friends.insert({name: "Bob", age: 24})
 WriteResult({ "nInserted" : 1 })
+
 > db.friends.find()
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24 }
+
 > db.friends.find({name: "John"})
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
+
 > db.friends.find({age: 23})
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
+
 > db.friends.find({age: {$gt: 23}})
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24 }
+
 > db.friends.find({}, {age: 1})
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "age" : 23 }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "age" : 24 }
+
 > db.friends.find({}, {age: 1, _id: 0})
 { "age" : 23 }
 { "age" : 25 }
 { "age" : 24 }
+
 > db.friends.find({}, {age: 1, _id: 0}).sort({age: 1})
 { "age" : 23 }
 { "age" : 24 }
 { "age" : 25 }
+
 > db.friends.find({}, {age: 1, _id: 0}).sort({age: -1})
 { "age" : 25 }
 { "age" : 24 }
 { "age" : 23 }
+
 > db.friends.find()
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24 }
+
 > db.friends.find().limit(1)
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
+
 > db.friends.find().limit(2)
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25 }
+
 > db.friends.find().limit(4)
 { "_id" : ObjectId("5ec001adff54c79e0355d411"), "name" : "John", "age" : 23 }
 { "_id" : ObjectId("5ec001e9ff54c79e0355d412"), "name" : "Mary", "age" : 25 }
 { "_id" : ObjectId("5ec0021cff54c79e0355d413"), "name" : "Bob", "age" : 24 }
+
 >
